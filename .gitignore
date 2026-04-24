@@ -12,14 +12,7 @@ env/
 venv/
 ENV/
 
-# Data folders (too large)
-training_set/
-test_set/
-single_prediction/
-
 # Model files (large)
-results/
-*.keras
 *.h5
 *.pkl
 *.pickle
