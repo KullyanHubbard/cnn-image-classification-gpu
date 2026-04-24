@@ -1,16 +1,42 @@
-# CNN Project
+# CNN Image Classification
 
 Proyek ini menggunakan Convolutional Neural Network (CNN) untuk klasifikasi gambar kucing dan anjing.
 
-## Struktur Folder
+## Isi Repository
 
+```text
+.
+|-- cnn.ipynb
+|-- Hasil Data CNN.txt
+|-- training_set/
+|   |-- cats/
+|   `-- dogs/
+|-- test_set/
+|   |-- cats/
+|   `-- dogs/
+|-- single_prediction/
+|   |-- cat_or_dog_1.jpg
+|   `-- cat_or_dog_2.jpg
+`-- results/
+    `-- best_model.keras
 ```
-├── cnn.ipynb              # Notebook utama dengan model CNN
-├── training_set/          # Data training (kucing & anjing)
-├── test_set/              # Data testing (kucing & anjing)
-├── single_prediction/     # Folder untuk prediksi individual
-└── results/               # Model yang sudah dilatih
-    └── best_model.keras   # Model terbaik yang disimpan
+
+## Dataset
+
+Dataset sudah disertakan dalam repository.
+
+- `training_set/cats`: 4.001 gambar
+- `training_set/dogs`: 4.001 gambar
+- `test_set/cats`: 1.001 gambar
+- `test_set/dogs`: 1.001 gambar
+- `single_prediction`: 2 gambar untuk uji prediksi individual
+
+## Model
+
+Model hasil training tersedia di:
+
+```text
+results/best_model.keras
 ```
 
 ## Requirements
@@ -21,7 +47,7 @@ Proyek ini menggunakan Convolutional Neural Network (CNN) untuk klasifikasi gamb
 - Matplotlib
 - Pillow
 
-## Instalasi
+Install dependency:
 
 ```bash
 pip install tensorflow numpy matplotlib pillow
@@ -30,11 +56,10 @@ pip install tensorflow numpy matplotlib pillow
 ## Penggunaan
 
 Buka dan jalankan `cnn.ipynb` di Jupyter Notebook untuk:
+
 - Melatih model CNN
 - Mengevaluasi performa model
-- Melakukan prediksi pada gambar baru
+- Menyimpan model terbaik ke `results/best_model.keras`
+- Melakukan prediksi gambar dari folder `single_prediction`
 
-## Notes
-
-- Training dan test data tidak disertakan dalam repository (file besar)
-- Model sudah dilatih tersimpan di `results/best_model.keras`
+Ringkasan hasil eksperimen tersimpan di `Hasil Data CNN.txt`.
