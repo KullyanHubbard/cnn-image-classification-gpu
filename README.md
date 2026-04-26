@@ -50,7 +50,56 @@ results/best_model.keras
 Install dependency:
 
 ```bash
-pip install tensorflow numpy matplotlib pillow
+pip install -r requirements.txt
+```
+
+## Menjalankan di Windows dan Ubuntu
+
+Repository ini bisa dipakai dari Windows dan Ubuntu sekaligus dengan cara clone repo yang sama di masing-masing OS, lalu sinkronisasi lewat GitHub.
+
+### Windows
+
+```powershell
+git pull origin main
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+jupyter notebook
+```
+
+Setelah selesai bekerja:
+
+```powershell
+git add .
+git commit -m "Update from Windows"
+git push origin main
+```
+
+### Ubuntu
+
+```bash
+sudo apt update
+sudo apt install -y git python3 python3-venv python3-pip
+git clone https://github.com/KullyanHubbard/cnn-image-classification.git
+cd cnn-image-classification
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook
+```
+
+Setelah selesai bekerja:
+
+```bash
+git add .
+git commit -m "Update from Ubuntu"
+git push origin main
+```
+
+Sebelum mulai kerja di OS lain, selalu jalankan:
+
+```bash
+git pull origin main
 ```
 
 ## Penggunaan

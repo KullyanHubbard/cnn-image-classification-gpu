@@ -1,0 +1,22 @@
+# Normalize text files across Windows and Ubuntu.
+* text=auto
+
+# Keep source and documentation files with LF endings in the repository.
+*.ipynb text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+requirements.txt text eol=lf
+
+# Treat dataset and model artifacts as binary files.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.keras binary
+*.h5 binary
+*.pkl binary
+*.pickle binary
+*.npy binary
+*.npz binary
