@@ -3,9 +3,14 @@ import json
 import os
 from pathlib import Path
 
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
+os.environ.setdefault("TF_ENABLE_ONEDNN_OPTS", "0")
+
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import mixed_precision
+
+tf.get_logger().setLevel("ERROR")
 
 
 def parse_args():
