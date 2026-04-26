@@ -39,6 +39,26 @@ Model hasil training tersedia di:
 results/best_model.keras
 ```
 
+Untuk mengejar akurasi di atas hasil CNN from-scratch, tersedia juga script
+transfer learning berbasis MobileNetV2:
+
+```bash
+python train_transfer_learning.py
+```
+
+Script ini akan menyimpan model terbaik ke:
+
+```text
+results/best_transfer_model.keras
+```
+
+Catatan: run pertama dengan `--weights imagenet` perlu download bobot pretrained
+sekali. Kalau ingin menjalankan tanpa download, pakai:
+
+```bash
+python train_transfer_learning.py --weights none
+```
+
 ## Requirements
 
 - Python 3.x
