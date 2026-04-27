@@ -1,0 +1,251 @@
+LAPORAN GABUNGAN HASIL EKSPERIMEN CNN
+Klasifikasi Gambar Kucing dan Anjing
+Tanggal penyusunan: 2026-04-27
+
+1. Tujuan Eksperimen
+
+Eksperimen ini dilakukan untuk membandingkan performa model CNN pada empat variasi kombinasi jumlah filter awal dan ukuran kernel. Tujuannya adalah melihat kombinasi mana yang menghasilkan akurasi terbaik pada data validasi dan data test.
+
+Variasi yang dibandingkan:
+1. Filter 32, kernel 3x3
+2. Filter 32, kernel 5x5
+3. Filter 64, kernel 3x3
+4. Filter 64, kernel 5x5
+
+2. Konfigurasi Umum
+
+Seluruh variasi menggunakan konfigurasi umum yang sama agar hasilnya bisa dibandingkan secara adil.
+
+- Ukuran gambar: 180 x 180
+- Batch size: 64
+- Validation split: 20%
+- Epoch maksimum: 100
+- Dataset training: 6400 gambar
+- Dataset validasi: 1600 gambar
+- Dataset test: 2000 gambar
+- Jumlah gambar test kucing: 1000
+- Jumlah gambar test anjing: 1000
+- L2 regularization: 0.00001
+- Optimizer: Adam
+- Learning rate awal: 0.00025
+- Loss function: binary_crossentropy
+- Metric utama: accuracy
+- Callback: EarlyStopping, ReduceLROnPlateau, dan ModelCheckpoint
+- Augmentasi training: rescale, shear, zoom, rotation, width shift, height shift, dan horizontal flip
+- Output layer: Dense 1 neuron dengan aktivasi sigmoid
+
+3. Ringkasan Hasil Utama
+
+| Variasi | Filter | Kernel | Epoch Jalan | Best Val Acc | Best Val Epoch | Final Val Acc | Test Acc | Test Loss | Benar/Salah Test |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Variasi 1 | 32 | 3x3 | 85/100 | 94.31% | 70 | 94.06% | 94.85% | 0.1964 | 1897/103 |
+| Variasi 2 | 32 | 5x5 | 57/100 | 95.00% | 42 | 94.88% | 94.50% | 0.1711 | 1890/110 |
+| Variasi 3 | 64 | 3x3 | 86/100 | 95.94% | 71 | 95.38% | 95.40% | 0.2112 | 1908/92 |
+| Variasi 4 | 64 | 5x5 | 100/100 | 94.38% | 89 | 94.06% | 94.70% | 0.2584 | 1894/106 |
+
+4. Detail Hasil Tiap Variasi
+
+4.1 Variasi 1 - Filter 32, Kernel 3x3
+
+- Run ID: f32_k3_img180x180_20260427_095143
+- Waktu run: 2026-04-27 09:51:43 WIB
+- Epoch dijalankan: 85 dari 100
+- Best validation accuracy: 94.31% pada epoch 70
+- Validation loss pada epoch terbaik: 0.2168
+- Training accuracy pada epoch terbaik: 99.20%
+- Best training accuracy: 99.36% pada epoch 84
+- Final validation accuracy: 94.06%
+- Test accuracy: 94.85%
+- Test loss: 0.1964
+- Prediksi benar pada test set: 1897 dari 2000 gambar
+- Prediksi salah pada test set: 103 dari 2000 gambar
+
+Hasil per kelas:
+- Kucing benar: 935 dari 1000
+- Kucing salah diprediksi sebagai anjing: 65
+- Recall kucing: 93.50%
+- Precision kucing: 96.09%
+- F1-score kucing: 94.78%
+- Anjing benar: 962 dari 1000
+- Anjing salah diprediksi sebagai kucing: 38
+- Recall anjing: 96.20%
+- Precision anjing: 93.67%
+- F1-score anjing: 94.92%
+
+Catatan:
+Variasi ini menghasilkan test accuracy yang cukup tinggi, yaitu 94.85%. Model lebih kuat mengenali anjing dibanding kucing. Gap antara training accuracy dan validation accuracy pada epoch terbaik sekitar 4.89 poin, sehingga ada indikasi overfitting ringan sampai sedang.
+
+4.2 Variasi 2 - Filter 32, Kernel 5x5
+
+- Run ID: f32_k5_img180x180_20260427_103101
+- Waktu run: 2026-04-27 10:31:01 WIB
+- Epoch dijalankan: 57 dari 100
+- Best validation accuracy: 95.00% pada epoch 42
+- Validation loss pada epoch terbaik: 0.1860
+- Training accuracy pada epoch terbaik: 98.34%
+- Best training accuracy: 99.34% pada epoch 55
+- Final validation accuracy: 94.88%
+- Test accuracy: 94.50%
+- Test loss: 0.1711
+- Prediksi benar pada test set: 1890 dari 2000 gambar
+- Prediksi salah pada test set: 110 dari 2000 gambar
+
+Hasil per kelas:
+- Kucing benar: 936 dari 1000
+- Kucing salah diprediksi sebagai anjing: 64
+- Recall kucing: 93.60%
+- Precision kucing: 95.32%
+- F1-score kucing: 94.45%
+- Anjing benar: 954 dari 1000
+- Anjing salah diprediksi sebagai kucing: 46
+- Recall anjing: 95.40%
+- Precision anjing: 93.71%
+- F1-score anjing: 94.55%
+
+Catatan:
+Variasi ini memiliki validation loss dan test loss paling rendah dibanding variasi lain. Namun, test accuracy-nya 94.50%, masih di bawah variasi 1 dan variasi 3. Ini menunjukkan loss lebih kecil tidak selalu berarti akurasi test paling tinggi.
+
+4.3 Variasi 3 - Filter 64, Kernel 3x3
+
+- Run ID: f64_k3_img180x180_20260427_153525
+- Waktu run: 2026-04-27 15:35:25 WIB
+- Epoch dijalankan: 86 dari 100
+- Best validation accuracy: 95.94% pada epoch 71
+- Validation loss pada epoch terbaik: 0.1786
+- Training accuracy pada epoch terbaik: 99.36%
+- Best training accuracy: 99.64% pada epoch 80
+- Final validation accuracy: 95.38%
+- Test accuracy: 95.40%
+- Test loss: 0.2112
+- Prediksi benar pada test set: 1908 dari 2000 gambar
+- Prediksi salah pada test set: 92 dari 2000 gambar
+
+Hasil per kelas:
+- Kucing benar: 950 dari 1000
+- Kucing salah diprediksi sebagai anjing: 50
+- Recall kucing: 95.00%
+- Precision kucing: 95.77%
+- F1-score kucing: 95.38%
+- Anjing benar: 958 dari 1000
+- Anjing salah diprediksi sebagai kucing: 42
+- Recall anjing: 95.80%
+- Precision anjing: 95.04%
+- F1-score anjing: 95.42%
+
+Catatan:
+Variasi ini menjadi hasil terbaik secara keseluruhan. Best validation accuracy mencapai 95.94% dan test accuracy mencapai 95.40%. Performa per kelas juga paling seimbang, karena recall kucing 95.00% dan recall anjing 95.80%.
+
+4.4 Variasi 4 - Filter 64, Kernel 5x5
+
+- Run ID: f64_k5_img180x180_20260427_161525
+- Waktu run: 2026-04-27 16:15:25 WIB
+- Epoch dijalankan: 100 dari 100
+- Best validation accuracy: 94.38% pada epoch 89
+- Validation loss pada epoch terbaik: 0.2631
+- Training accuracy pada epoch terbaik: 99.58%
+- Best training accuracy: 99.58% pada epoch 89
+- Final validation accuracy: 94.06%
+- Test accuracy: 94.70%
+- Test loss: 0.2584
+- Prediksi benar pada test set: 1894 dari 2000 gambar
+- Prediksi salah pada test set: 106 dari 2000 gambar
+
+Hasil per kelas:
+- Kucing benar: 934 dari 1000
+- Kucing salah diprediksi sebagai anjing: 66
+- Recall kucing: 93.40%
+- Precision kucing: 95.89%
+- F1-score kucing: 94.63%
+- Anjing benar: 960 dari 1000
+- Anjing salah diprediksi sebagai kucing: 40
+- Recall anjing: 96.00%
+- Precision anjing: 93.57%
+- F1-score anjing: 94.77%
+
+Catatan:
+Variasi ini tidak menjadi yang terbaik walaupun memakai filter lebih besar dan kernel lebih besar. Epoch berjalan sampai 100, tetapi best validation accuracy hanya 94.38%. Gap training-validation pada epoch terbaik sekitar 5.20 poin, sehingga indikasi overfitting lebih terlihat dibanding variasi 2 dan 3.
+
+5. Perbandingan dan Analisis
+
+5.1 Berdasarkan Best Validation Accuracy
+
+Urutan performa berdasarkan best validation accuracy:
+1. Variasi 3, filter 64 kernel 3x3: 95.94%
+2. Variasi 2, filter 32 kernel 5x5: 95.00%
+3. Variasi 4, filter 64 kernel 5x5: 94.38%
+4. Variasi 1, filter 32 kernel 3x3: 94.31%
+
+Berdasarkan validasi, variasi 3 adalah yang paling baik. Variasi 2 juga cukup kuat, tetapi tidak mengalahkan variasi 3.
+
+5.2 Berdasarkan Test Accuracy
+
+Urutan performa berdasarkan test accuracy:
+1. Variasi 3, filter 64 kernel 3x3: 95.40%
+2. Variasi 1, filter 32 kernel 3x3: 94.85%
+3. Variasi 4, filter 64 kernel 5x5: 94.70%
+4. Variasi 2, filter 32 kernel 5x5: 94.50%
+
+Berdasarkan data test, variasi 3 tetap menjadi model terbaik. Variasi 1 menjadi peringkat kedua pada test accuracy meskipun best validation accuracy-nya bukan yang tertinggi.
+
+5.3 Berdasarkan Loss
+
+Variasi 2 memiliki test loss paling rendah, yaitu 0.1711. Namun akurasi test variasi 2 hanya 94.50%. Ini berarti prediksi variasi 2 cenderung lebih yakin pada sebagian kasus, tetapi jumlah prediksi benar secara total masih kalah dari variasi 3.
+
+5.4 Berdasarkan Keseimbangan Kelas
+
+Variasi 3 memiliki performa per kelas paling seimbang:
+- Recall kucing: 95.00%
+- Recall anjing: 95.80%
+- Selisih recall antar kelas: 0.80 poin
+
+Variasi 1 dan variasi 4 lebih kuat mengenali anjing daripada kucing. Variasi 2 juga masih lebih kuat pada anjing, tetapi selisihnya lebih kecil daripada variasi 1 dan 4.
+
+5.5 Berdasarkan Overfitting
+
+Gap training-validation pada epoch validasi terbaik:
+- Variasi 1: 4.89 poin
+- Variasi 2: 3.34 poin
+- Variasi 3: 3.42 poin
+- Variasi 4: 5.20 poin
+
+Variasi 2 memiliki gap paling kecil, tetapi test accuracy-nya tidak tertinggi. Variasi 3 tetap menjadi pilihan terbaik karena memiliki best validation accuracy dan test accuracy tertinggi, dengan gap yang masih cukup terkendali.
+
+6. Kesimpulan Akhir
+
+Berdasarkan empat variasi yang sudah diuji, model terbaik adalah Variasi 3 dengan filter 64 dan kernel 3x3. Model ini menghasilkan best validation accuracy 95.94% dan test accuracy 95.40%, sekaligus memiliki performa kucing dan anjing yang paling seimbang.
+
+Hasil ini menunjukkan bahwa menambah jumlah filter dari 32 menjadi 64 dapat meningkatkan performa jika tetap menggunakan kernel 3x3. Namun, memperbesar kernel dari 3x3 menjadi 5x5 tidak selalu meningkatkan akurasi. Pada filter 64, kernel 5x5 justru menurunkan best validation accuracy dan test accuracy dibanding kernel 3x3.
+
+Dengan demikian, konfigurasi yang paling direkomendasikan dari eksperimen ini adalah:
+- Filter awal: 64
+- Kernel size: 3x3
+- Image size: 180 x 180
+- Batch size: 64
+
+Variasi 3 dapat dijadikan model terbaik dari eksperimen ini, sedangkan variasi lain dapat digunakan sebagai pembanding untuk menjelaskan pengaruh perubahan filter dan kernel terhadap performa CNN.
+
+7. File Hasil Eksperimen
+
+Variasi 1:
+- Folder: results/f32_k3_img180x180_20260427_095143
+- Metrics JSON: results/f32_k3_img180x180_20260427_095143/metrics_f32_k3_img180x180_20260427_095143.json
+- Report TXT: results/f32_k3_img180x180_20260427_095143/training_report_f32_k3_img180x180_20260427_095143.txt
+- Model terbaik: results/f32_k3_img180x180_20260427_095143/best_model_f32_k3_img180x180_20260427_095143.keras
+
+Variasi 2:
+- Folder: results/f32_k5_img180x180_20260427_103101
+- Metrics JSON: results/f32_k5_img180x180_20260427_103101/metrics_f32_k5_img180x180_20260427_103101.json
+- Report TXT: results/f32_k5_img180x180_20260427_103101/training_report_f32_k5_img180x180_20260427_103101.txt
+- Model terbaik: results/f32_k5_img180x180_20260427_103101/best_model_f32_k5_img180x180_20260427_103101.keras
+
+Variasi 3:
+- Folder: results/f64_k3_img180x180_20260427_153525
+- Metrics JSON: results/f64_k3_img180x180_20260427_153525/metrics_f64_k3_img180x180_20260427_153525.json
+- Report TXT: results/f64_k3_img180x180_20260427_153525/training_report_f64_k3_img180x180_20260427_153525.txt
+- Model terbaik: results/f64_k3_img180x180_20260427_153525/best_model_f64_k3_img180x180_20260427_153525.keras
+
+Variasi 4:
+- Folder: results/f64_k5_img180x180_20260427_161525
+- Metrics JSON: results/f64_k5_img180x180_20260427_161525/metrics_f64_k5_img180x180_20260427_161525.json
+- Report TXT: results/f64_k5_img180x180_20260427_161525/training_report_f64_k5_img180x180_20260427_161525.txt
+- Model terbaik: results/f64_k5_img180x180_20260427_161525/best_model_f64_k5_img180x180_20260427_161525.keras
